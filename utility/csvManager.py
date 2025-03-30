@@ -1,7 +1,7 @@
 import pandas as pd
 
 def read_csv_file(input_path):
-    """Reads a CSV file and returns a DataFrame."""
+    # Reads a CSV file and returns a DataFrame.
     df = pd.read_csv(input_path)
     
     # Rename 'Unnamed: 0' to 'id' if it exists

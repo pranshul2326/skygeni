@@ -4,6 +4,7 @@ from sqlManager.sqlManager import sqlManager
 
 #How many finance lending and blockchain clients does the organization have?
 print("Question 1 Result : ")
+#Returns the total number of clients in 'Block Chain' or 'Finance Lending' industries
 ques1_query = "SELECT count(*) as industry_count from client_info_table where industry in ('Block Chain','Finance Lending')"
 sqlManager(ques1_query) 
 # answer of query 1 is : 47.
@@ -12,6 +13,8 @@ print()
 
 #Which industry in the organization has the highest renewal rate?
 print("Question 2 Result : ")
+# This query finds the industry with the highest subscription renewal rate by calculating the ratio of renewed subscriptions to total subscriptions for each industry.
+# It joins client_info_table with subscription_info_data, groups by industry, then sorts by renewal rate to return only the top performer.
 ques2_query = """
 WITH IndustryRenewal AS (
     SELECT 
@@ -35,6 +38,8 @@ print()
 
 
 print("Question 3 Result : ")
+# This query calculates the average inflation rate during periods when subscriptions were renewed.
+# It joins subscription_info_data with finanical_info_table where the subscription end date falls within the financial date range.
 ques3_query  = """
 SELECT AVG(f.inflation_rate) as average_inflation_rate
 FROM subscription_info_data s
@@ -46,7 +51,8 @@ sqlManager(ques3_query)
 #output : average_inflation_rate : 4.3118
 print()
 
-
+# This query calculates the median amount paid for each year across all payment methods.
+#   It extracts the year from payment_date, then uses ROW_NUMBER() and window functions to identify median positions for each year's payments.
 print("Question 4 Result : ")
 ques4_query = """
 WITH PaymentData AS (

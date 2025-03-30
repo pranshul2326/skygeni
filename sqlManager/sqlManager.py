@@ -19,16 +19,12 @@ def sqlManager(sql_query):
     cursor.execute(sql_query)
 
      # Fetch results if it's a SELECT query
-    if sql_query.strip().lower().startswith("select"):
-        columns = [desc[0] for desc in cursor.description]  # Column names
-        rows = cursor.fetchall()  # Get all results
-        conn.close()
-        print(columns)  # Column names
-        print(rows)  # Data rows
-    # For other queries (INSERT, UPDATE, DELETE)
-    else:
-        conn.commit()
-        print("Query executed successfully.")
+    columns = [desc[0] for desc in cursor.description]  # Column names
+    rows = cursor.fetchall()  # Get all results
+    conn.close()
+    print(columns)  # Column names
+    print(rows)  # Data rows
+    print("Query executed successfully.")
 
     # Close connection at the end
     conn.close()

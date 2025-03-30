@@ -5,8 +5,9 @@ from sqlManager.sqlManager import sqlManager
 #How many finance lending and blockchain clients does the organization have?
 print("Question 1 Result : ")
 ques1_query = "SELECT count(*) as industry_count from client_info_table where industry in ('Block Chain','Finance Lending')"
-sqlManager(ques1_query) # answer of query 1 is = 47.
-
+sqlManager(ques1_query) 
+# answer of query 1 is : 47.
+print()
 
 
 #Which industry in the organization has the highest renewal rate?
@@ -28,23 +29,22 @@ ORDER BY renewal_rate DESC
 LIMIT 1;
 """
 # Execute queries and print results
-sqlManager(ques2_query) # answer of query 2 is = AI.
+sqlManager(ques2_query) 
+# answer of query 2 is : AI.
+print()
 
 
 print("Question 3 Result : ")
-ques3_query = """
-WITH renewed_subscriptions AS (
-    SELECT client_id, DATE(start_date) AS renewal_date
-    FROM subscription_info_data
-    WHERE renewed = 'TRUE'
-)
-SELECT AVG(f.inflation_rate) AS avg_inflation_rate
-FROM renewed_subscriptions r
-JOIN finanical_info_table f
-ON r.renewal_date >= DATE(f.start_date) 
-AND r.renewal_date <= DATE(f.end_date);
+ques3_query  = """
+SELECT AVG(f.inflation_rate) as average_inflation_rate
+FROM subscription_info_data s
+JOIN finanical_info_table f 
+ON s.end_date BETWEEN f.start_date AND f.end_date
+WHERE s.renewed = 1
 """
 sqlManager(ques3_query)
+#output : average_inflation_rate : 4.3118
+print()
 
 
 print("Question 4 Result : ")
@@ -75,9 +75,13 @@ GROUP BY payment_year
 ORDER BY payment_year;
 """
 sqlManager(ques4_query)
-['payment_year', 'median_amount']
-# output : [(2018, 235.7), (2019, 360.9), (2020, 284.5), (2021, 306.79999999999995), (2022, 288.0)]
-
+#output : 
+# payment_year | median_amount
+# 2018 | 235.7
+# 2019 | 360.9
+# 2020 | 284.5
+# 2021 | 306.79999999999995
+# 2022 | 288.0
 
 
 

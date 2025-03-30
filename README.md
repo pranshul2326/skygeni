@@ -18,6 +18,7 @@ This project contains in-depths solution of the below listed problems.
         Please add as much comments in the code as possible, it will help us evaluate better
 
 Answers:-
+
         Question 1 Result :
         industry_count
         47

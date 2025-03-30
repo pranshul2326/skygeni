@@ -1,12 +1,16 @@
 ##this file contains only the answers and questions of the problem. not having any logical code.
 from sqlManager.sqlManager import sqlManager
 
+
 #How many finance lending and blockchain clients does the organization have?
-ques1_query = "SELECT count(*) from client_info_table where industry in ('Block Chain','Finance Lending')"
+print("Question 1 Result : ")
+ques1_query = "SELECT count(*) as industry_count from client_info_table where industry in ('Block Chain','Finance Lending')"
 sqlManager(ques1_query) # answer of query 1 is = 47.
 
 
+
 #Which industry in the organization has the highest renewal rate?
+print("Question 2 Result : ")
 ques2_query = """
 WITH IndustryRenewal AS (
     SELECT 
@@ -27,6 +31,7 @@ LIMIT 1;
 sqlManager(ques2_query) # answer of query 2 is = AI.
 
 
+print("Question 3 Result : ")
 ques3_query = """
 WITH renewed_subscriptions AS (
     SELECT client_id, DATE(start_date) AS renewal_date
@@ -41,6 +46,8 @@ AND r.renewal_date <= DATE(f.end_date);
 """
 sqlManager(ques3_query)
 
+
+print("Question 4 Result : ")
 ques4_query = """
 WITH PaymentData AS (
     SELECT 

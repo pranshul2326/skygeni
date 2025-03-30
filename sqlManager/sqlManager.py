@@ -22,8 +22,9 @@ def sqlManager(sql_query):
     columns = [desc[0] for desc in cursor.description]  # Column names
     rows = cursor.fetchall()  # Get all results
     conn.close()
-    print(columns)  # Column names
-    print(rows)  # Data rows
+    print(" | ".join(columns))  # Print column names
+    for row in rows:
+        print(" | ".join(map(str, row))) 
     print("Query executed successfully.")
 
     # Close connection at the end

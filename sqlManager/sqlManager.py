@@ -12,10 +12,10 @@ def sqlManager(sql_query):
     cursor = conn.cursor()
 
      # Store DataFrames as table
-    finanical_info_df.to_sql("finance_data", conn, if_exists="append", index=False)
-    client_info_df.to_sql("client_data", conn, if_exists="replace", index=False)
-    payment_info_df.to_sql("payment_data", conn, if_exists="replace", index=False)
-    subscription_info_df.to_sql("subscription_data", conn, if_exists="replace", index=False)
+    finanical_info_df.to_sql("finanical_info_table", conn, if_exists="append", index=False)
+    client_info_df.to_sql("client_info_table", conn, if_exists="replace", index=False)
+    payment_info_df.to_sql("payment_info_table", conn, if_exists="replace", index=False)
+    subscription_info_df.to_sql("subscription_info_data", conn, if_exists="replace", index=False)
     cursor.execute(sql_query)
 
      # Fetch results if it's a SELECT query
@@ -25,11 +25,8 @@ def sqlManager(sql_query):
         conn.close()
         print(columns)  # Column names
         print(rows)  # Data rows
-        # return rows, columns  # Return data
-
     # For other queries (INSERT, UPDATE, DELETE)
     else:
-        # Commit for INSERT/UPDATE/DELETE before closing connection
         conn.commit()
         print("Query executed successfully.")
 
